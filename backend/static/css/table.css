@@ -1,0 +1,63 @@
+table {
+   background-color: #4086FF; /* Green background */
+   border: 2px solid black; /* Green border */
+   position: absolute;
+   top: 40px; /* Расстояние от верхнего края */
+   left: 900px; /* Расстояние от левого края */ 
+   bottom: 0; right: 0;
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+}
+
+td {
+  max-width: 100px;
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  word-wrap: break-word;
+}
+
+.defect-class {
+  background-color: #E5EFFF;
+}
+
+.defect-sign {
+  background-color: #C9DDFF;
+}
+
+.defect-comment {
+  background-color: #E5EFFF;
+}
+
+.defect-color {
+  background-color: #C9DDFF;
+}
+
+.edit-td .edit-area {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+
+  /* отключаем изменение размера мышью в Firefox */
+  resize: none;
+
+  /* удаляем обводку при фокусировке в Chrome */
+  outline: none;
+
+  /* удаляем полосу прокрутки в IE */
+  overflow: auto;
+}
+
+.edit-controls {
+  position: absolute;
+}
+
+.edit-td {
+  position: relative;
+  padding: 0;
+}
