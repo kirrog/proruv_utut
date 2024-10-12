@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -11,6 +11,13 @@ app = Flask(__name__)
 # get image
 # post add bounding box
 # post update bounding box
+
+
+
+@app.route('/')
+def endpoint_index():
+    return render_template('index.html')
+
 
 @app.route("/check", methods=['GET'])
 def endpoint_check():
