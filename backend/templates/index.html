@@ -1,82 +1,89 @@
-<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/list_box.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/img.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/button.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/table.css')}}">
+<script src="lib/jquery-3.7.1.min.js"></script>
 
-    <style>
-        .p-border {
-           border: 1px solid black;
-           text-align: center;
-           background: white;
-           padding: 2px;
-           width: 200; /* Set a width if needed */
-        }
-    </style>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../static/css/list_box.css">
+<link rel="stylesheet" href="../static/css/img.css">
+<link rel="stylesheet" href="../static/css/button.css">
+<link rel="stylesheet" href="../static/css/table.css">
+<link rel="stylesheet" href="../static/css/loader.css">
+<link rel="stylesheet" href="../static/css/popup.css">
+<link rel="stylesheet" href="../static/css/cover.css">
+
+<style>
+.p-border {
+   border: 1px solid black;
+   text-align: center;
+   background: white;
+   padding: 2px;
+   width: 200; /* Set a width if needed */
+}
+</style>
 
 </head>
 
 <body style="background-color:#DEF6FF; font-size: 16;">
 
-<p class="p-border">Список изображений</p>
+<p class="p-border" >Список изображений</p>
 <p class="p-border" style="position:absolute; top: -10px; left:280px; width: 300;">Изображение выбранного ноутбука</p>
 <p class="p-border" style="position:absolute; top: -10px; left:900px; width: 300;">Таблица характеристик повреждений</p>
 
 <div class="listbox-area">
-    <div>
-        <ul id="ss_elem_list" tabindex="0" role="listbox" aria-labelledby="ss_elem">
-            <li id="ss_elem_Np" role="option">
-                <span class="checkmark" aria-hidden="true"></span>
-                img_exampleloooooooooong.png
-            </li>
-            <li id="ss_elem_Pu" role="option">
-                <span class="checkmark" aria-hidden="true"></span>
-                img_example2.png
-            </li>
-        </ul>
-    </div>
+  <div>
+    <ul id="ss_elem_list" tabindex="0" role="listbox" aria-labelledby="ss_elem">
+
+    </ul>
+  </div>
 </div>
 
 <div class="btn-group">
-    <button type="button" id="load_img">Загрузить изображение</button>
-    <button type="button" id="load_imgs">Загрузить изображение из директории</button>
-    <button type="button" id="unload_res">Сформировать и выгрузить отчет</button>
+<button type="button" id="load_imgs">Загрузить несколько изображений</button>
+<button type="button" id="unload_res">Сформировать и выгрузить отчет</button>
 </div>
 
 <div class="wrapper">
-    <div class="box box1"><img src="{{url_for('static', filename='/assets/IMG_7556.JPG')}}" > alt="Изображение ноутбука"></div>
+   <div id="defect-img" class="box box1">Ожидание загрузки изображений</div>
+   <lable class="lable_under" id="defect-img-label">Название/идентификатор ноутбука: -</lable>
 </div>
 
 <table id="defect-table">
-    <thead>
+  <thead>
     <tr>
-        <th><strong>Общий класс повреждений</strong></th>
-        <th><strong>Детальное описание</strong></th>
-        <th><strong>Комментарии</strong></th>
-        <th><strong>Цвет обозначения</strong></th>
+      <th><strong>Общий класс повреждений</strong></th>
+      <th><strong>Детальное описание</strong></th>
+      <th><strong>Комментарии</strong></th>
+      <th><strong>Цвет обозначения</strong></th>
     </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td class="defect-class">Царапина</td>
-        <td class="defect-sign">Царапина на передней панели сверху</td>
-        <td class="defect-comment"> -</td>
-        <td class="defect-color">Зеленый</td>
-    </tr>
-    <tr>
-        <td class="defect-class">Пыль</td>
-        <td class="defect-sign">Пылинка на экране</td>
-        <td class="defect-comment">Сегодня исправлю</td>
-        <td class="defect-color">Красный</td>
-    </tr>
-    </tbody>
+  </thead>
+  <tbody>
+  <tr>
+    <td class="defect-class">-</td>
+    <td class="defect-sign">-</td>
+    <td class="defect-comment">-</td>
+    <td class="defect-color">-</td>
+  </tr>
+  </tbody>
 </table>
 
-<script src="{{url_for('static', filename='/js/list_box.js')}}"></script>
-<script src="{{url_for('static', filename='/js/table.js')}}"></script>
+<div class="w3-container" id="hidden-popup">
+  <label>Введите название ноутбука (идентификатор) для выбранных изображений (опционально):</label>
+    <span>
+        <textarea class="input_2" id="laptop-name"></textarea>
+    </span>
+  <label>Введите дополнительное описание для выбранных изображений (опционально):</label>
+    <span>
+        <textarea class="input_2" style="height:250px" id="laptop-description"></textarea>
+    </span>
+   <button type="button" style="width:100px; margin-left:50px; margin-right:10px; float:left;" id="popup_ok">ОК</button>
+</div>
+
+<div id="cover"> </div>
+
+<script src="../static/js/index.js"></script>
+<script src="../static/js/list_box.js"></script>
+<script src="../static/js/table.js"></script>
+
 
 </body>
 </html>

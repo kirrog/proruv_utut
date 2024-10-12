@@ -20,7 +20,7 @@
 [role="listbox"]#ss_elem_list {
   position: relative;
   max-height: 20em;
-  width: 100%;
+  width: 180;
   overflow-y: auto;
 }
 
@@ -52,6 +52,7 @@
   cursor: pointer;
   max-width: 130px;
   word-wrap: break-word;
+  border: 1px solid #aaa;
 }
 
 [role="listbox"]:focus [role="option"].focused {

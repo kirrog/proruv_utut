@@ -3,6 +3,10 @@ let table = document.getElementById("defect-table");
 let editingTd;
 
 table.onclick = function (event) {
+  if (curr_id == 0) {
+	return
+  }
+
   // 3 возможных цели
   let target = event.target.closest(".edit-cancel,.edit-ok,td");
 
@@ -46,9 +50,14 @@ function makeTdEditable(td) {
 function finishTdEdit(td, isOk) {
   if (isOk) {
     td.innerHTML = td.firstChild.value;
+    for (const img_anchor of image_arr) {
+	if (img_anchor.id == curr_id) {
+		img_anchor.defect_table = $("#defect-table").html();
+	}
+    }
   } else {
     td.innerHTML = editingTd.data;
   }
   td.classList.remove("edit-td");
-  editingTd = null;
+  editingTd = null; 
 }

@@ -25,3 +25,10 @@
 .box1 img {
   object-fit: contain;
 }
+
+.lable_under {
+  position: absolute;
+  top: 560px;
+  left: 280px;
+  bottom: 0; right: 0;
+}
