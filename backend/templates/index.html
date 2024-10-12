@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/list_box.css">
-    <link rel="stylesheet" href="css/img.css">
-    <link rel="stylesheet" href="css/button.css">
-    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/list_box.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/img.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/button.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/table.css')}}">
 
     <style>
         .p-border {
@@ -47,7 +47,7 @@
 </div>
 
 <div class="wrapper">
-    <div class="box box1"><img src="assets/IMG_7556.JPG" alt="Изображение ноутбука"></div>
+    <div class="box box1"><img src="{{url_for('static', filename='/assets/IMG_7556.JPG')}}" > alt="Изображение ноутбука"></div>
 </div>
 
 <table id="defect-table">
@@ -75,8 +75,8 @@
     </tbody>
 </table>
 
-<script src="js/list_box.js"></script>
-<script src="js/table.js"></script>
+<script src="{{url_for('static', filename='/js/list_box.js')}}"></script>
+<script src="{{url_for('static', filename='/js/table.js')}}"></script>
 
 </body>
 </html>
