@@ -1,8 +1,29 @@
+import os
+from dotenv import load_dotenv, dotenv_values
+import redis
 from flask import Flask, render_template, request
 
-from backend.src.db_controller import DBController
-from backend.src.image_controller import ImageController
-from backend.src.model_processor import ModelProcessor
+from src.db_controller import DBController
+from src.image_controller import ImageController
+from src.model_processor import ModelProcessor
+
+load_dotenv()
+# os.getenv(&quot;MY_KEY&quot;)
+
+r = redis.Redis(host='redis', port=6379, db=0,
+                username=os.getenv("REDIS_USER"),
+                password=os.getenv("REDIS_USER_PASSWORD"))
+
+try:
+    info = r.info()
+    print(info['redis_version'])
+    response = r.ping()
+    if response:
+        print("Подключение успешно!")
+    else:
+        print("Не удалось подключиться к Redis.")
+except redis.exceptions.RedisError as e:
+    print(f"Ошибка: {e}")
 
 app = Flask(__name__)
 
@@ -82,7 +103,7 @@ def endpoint_post_update_bounding_box():
 
 
 @app.route("/get_start_retrain", methods=['GET'])
-def endpoint_post_update_bounding_box():
+def endpoint_start_retrain():
     state = img_control.model_processor.retrain()
     return state
 

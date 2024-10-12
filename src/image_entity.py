@@ -1,6 +1,6 @@
 from typing import List
 
-from backend.src.defect_entity import DefectEntity
+from src.defect_entity import DefectEntity
 
 
 class ImageEntity:

@@ -1,8 +1,8 @@
 from typing import List
 
-from backend.src.db_controller import DBController
-from backend.src.image_entity import ImageEntity
-from backend.src.model_processor import ModelProcessor
+from src.db_controller import DBController
+from src.image_entity import ImageEntity
+from src.model_processor import ModelProcessor
 
 
 class ImageController:
