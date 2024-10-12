@@ -1,27 +1,83 @@
-{% extends 'base.html' %}
-{% block content %}
- <h2> Welcome to <span class="text-primary">PLAZA</span>. <small>front-end for python scripts we used to run from console</small></h2>
- <h3 class="text-primary">
-  What is PLAZA?
- </h3>
- <p >
-  PLAZA is a web front-end to python scripts built with these goals in mind:
-  <ul>
-   <li>allow people with zero python knowledge to use the scripts by interaction through simple Web GUI;</li>
-   <li>beautify scripts' output with modern CSS and HTML formatting;</li>
-   <li>aggregate all the scripts in one repo but in a separate sandboxed directories to increase code manageability.</li>
-  </ul>
- </p>
-<h3 class="text-primary">
-  How to use?
- </h3>
- <p >
-  Navigate through the side menu to the desired script and follow the instructions.
- </p>
-<h3 class="text-primary">
-  Contacts
- </h3>
- <p >
-  Have any ideas, questions, problems? Visit <a href="/contacts">contacts</a> page for all the details.
- </p>
-{% endblock %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/list_box.css">
+    <link rel="stylesheet" href="css/img.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/table.css">
+
+    <style>
+        .p-border {
+           border: 1px solid black;
+           text-align: center;
+           background: white;
+           padding: 2px;
+           width: 200; /* Set a width if needed */
+        }
+    </style>
+
+</head>
+
+<body style="background-color:#DEF6FF; font-size: 16;">
+
+<p class="p-border">Список изображений</p>
+<p class="p-border" style="position:absolute; top: -10px; left:280px; width: 300;">Изображение выбранного ноутбука</p>
+<p class="p-border" style="position:absolute; top: -10px; left:900px; width: 300;">Таблица характеристик повреждений</p>
+
+<div class="listbox-area">
+    <div>
+        <ul id="ss_elem_list" tabindex="0" role="listbox" aria-labelledby="ss_elem">
+            <li id="ss_elem_Np" role="option">
+                <span class="checkmark" aria-hidden="true"></span>
+                img_exampleloooooooooong.png
+            </li>
+            <li id="ss_elem_Pu" role="option">
+                <span class="checkmark" aria-hidden="true"></span>
+                img_example2.png
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="btn-group">
+    <button type="button" id="load_img">Загрузить изображение</button>
+    <button type="button" id="load_imgs">Загрузить изображение из директории</button>
+    <button type="button" id="unload_res">Сформировать и выгрузить отчет</button>
+</div>
+
+<div class="wrapper">
+    <div class="box box1"><img src="assets/IMG_7556.JPG" alt="Изображение ноутбука"></div>
+</div>
+
+<table id="defect-table">
+    <thead>
+    <tr>
+        <th><strong>Общий класс повреждений</strong></th>
+        <th><strong>Детальное описание</strong></th>
+        <th><strong>Комментарии</strong></th>
+        <th><strong>Цвет обозначения</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="defect-class">Царапина</td>
+        <td class="defect-sign">Царапина на передней панели сверху</td>
+        <td class="defect-comment"> -</td>
+        <td class="defect-color">Зеленый</td>
+    </tr>
+    <tr>
+        <td class="defect-class">Пыль</td>
+        <td class="defect-sign">Пылинка на экране</td>
+        <td class="defect-comment">Сегодня исправлю</td>
+        <td class="defect-color">Красный</td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="js/list_box.js"></script>
+<script src="js/table.js"></script>
+
+</body>
+</html>
+        
