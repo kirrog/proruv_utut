@@ -1,6 +1,7 @@
 import os
-from dotenv import load_dotenv, dotenv_values
+
 import redis
+from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
 from src.db_controller import DBController
@@ -8,7 +9,6 @@ from src.image_controller import ImageController
 from src.model_processor import ModelProcessor
 
 load_dotenv()
-# os.getenv(&quot;MY_KEY&quot;)
 
 r = redis.Redis(host='redis', port=6379, db=0,
                 username=os.getenv("REDIS_USER"),
