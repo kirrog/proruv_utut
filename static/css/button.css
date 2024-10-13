@@ -1,4 +1,4 @@
-.btn-group button {
+.btn-group button, button {
     background-color: #93C1D5; /* Green background */
     border: 2px solid black; /* Green border */
     color: black; /* White text */
@@ -9,11 +9,11 @@
     margin-top: 10px;
 }
 
-.btn-group button:not(:last-child) {
+.btn-group button:not(:last-child),  button:not(:last-child){
 
 }
 
 /* Add a background color on hover */
-.btn-group button:hover {
+.btn-group button:hover, button:hover{
     background-color: #E6F8FF;
 }
