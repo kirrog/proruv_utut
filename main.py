@@ -1,8 +1,10 @@
+import json
 import os
 
 import redis
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
+from requests_toolbelt import MultipartEncoder
 
 from src.db_controller import DBController
 from src.image_controller import ImageController
@@ -10,14 +12,14 @@ from src.model_processor import ModelProcessor
 
 load_dotenv()
 
-r = redis.Redis(host='redis', port=6379, db=0,
-                username=os.getenv("REDIS_USER"),
-                password=os.getenv("REDIS_USER_PASSWORD"))
+redis_controller = redis.Redis(host='redis', port=6379, db=0,
+                               username=os.getenv("REDIS_USER"),
+                               password=os.getenv("REDIS_USER_PASSWORD"))
 
 try:
-    info = r.info()
+    info = redis_controller.info()
     print(info['redis_version'])
-    response = r.ping()
+    response = redis_controller.ping()
     if response:
         print("Подключение успешно!")
     else:
@@ -37,7 +39,7 @@ app = Flask(__name__)
 # post update bounding box
 
 model_processor = ModelProcessor()
-db_controller = DBController()
+db_controller = DBController(redis_controller)
 img_control = ImageController(db_controller, model_processor)
 
 
@@ -53,20 +55,24 @@ def endpoint_check():
 
 @app.route("/get_image_list", methods=['GET'])
 def endpoint_get_image_list():
-    return img_control.get_image_list()
+    image_instance = img_control.get_image_list()
+    return image_instance
 
 
 @app.route("/post_load_image", methods=['POST'])
 def endpoint_post_load_image():
-    image_data = request.json()
-    img_id = img_control.add_image(image_data)
+    img_data = request.files['img_data'].read()
+    image_data = request.form
+    print(img_data[:100])
+    print(image_data)
+    img_id = img_control.add_image(img_data, image_data)
     img_control.process_img(img_id)
     return img_id
 
 
 @app.route("/post_load_images", methods=['POST'])
 def endpoint_post_load_images():
-    images_data = request.json()
+    images_data = request.json
     img_id_list = []
     for image_data in images_data:
         img_id = img_control.add_image(image_data)
@@ -82,13 +88,19 @@ def endpoint_get_dump_results():
 
 @app.route("/get_image", methods=['GET'])
 def endpoint_get_image():
-    image_id = request.json()
-    return img_control.get_image(image_id)
+    req_json = request.json
+    img_entity = img_control.get_image(req_json["img_id"])
+    m = MultipartEncoder(fields={'img_id': img_entity.img_id,
+                                 'img_name': img_entity.img_name,
+                                 'img_comment': img_entity.img_comment,
+                                 'img_defect_list': json.dumps(img_entity.img_defect_list),
+                                 'files': ("image", img_entity.img_data, 'image.png')})
+    return (m.to_string(), {'Content-Type': m.content_type})
 
 
 @app.route("/post_add_bounding_box", methods=['POST'])
 def endpoint_post_add_bounding_box():
-    image_data = request.json()
+    image_data = request.json
     img_id = image_data["img_data"]
     bounding_boxes = image_data["bounding_boxes"]
     return img_control.add_bounding_box(img_id, bounding_boxes)
@@ -96,7 +108,7 @@ def endpoint_post_add_bounding_box():
 
 @app.route("/post_update_bounding_box", methods=['POST'])
 def endpoint_post_update_bounding_box():
-    image_data = request.json()
+    image_data = request.json
     img_id = image_data["img_data"]
     bounding_boxes = image_data["bounding_boxes"]
     return img_control.update_bounding_box(img_id, bounding_boxes)
